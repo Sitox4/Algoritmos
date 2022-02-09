@@ -1,0 +1,60 @@
+Informe Practica 4
+
+AUTORES:
+
+   Alejandro Camino Pardo
+   Sergio Vila Riveira
+
+
+
+1.Caracteristicas del PC:
+
+	Procesador	 AMD RYZEN 7 5800H
+	Memoria RAM	: 16GiB
+	Kernel: 5.11.0-34-generic
+	OS: Ubuntu 21.04 hirsute
+	gcc version 10.3.0
+	
+	
+2. Introduccion
+
+En esta cuarta práctica de la asignatura estudiaremos empiricamente la complejidad computacional para el algoritmo de Prim, ayudandonos para ello de la implementacion de una cola en lenguaje C. Este algoritmo sirve para encontrar un arbol recubridor minimo en un grafo conexo, no dirigido y cuyas aristas tienen nombres.  Además comprobaremos el correcto funcionamiento de algoritmo con tres caso de prueba ya dados.
+El estudio de la complejidad se hará a través de unasfunciones que generarán un grafo completo no dirigido con valores aleatorios entre 1 y el números de nodos que tenga el grafo.
+
+3. Estudio complejidad
+
+
+Algoritmo de Prim
+                n                         t(n)            t(n)/(n^1.85)           t(n)/(n^2.08)           t(n)/(n^2.3)
+(*)           15                 7.091000                0.047308                0.025377                0.013986
+(*)           30                 6.570000                0.012159                0.005561                0.002631
+(*)           60                 23.268000               0.011945                0.004658                0.001892
+(*)          120                 48.784000               0.006947                0.002310                0.000806
+(*)          240                 162.847000              0.006433                0.001824                0.000546
+             480                 727.000000              0.007966                0.001926                0.000495
+             960                 4509.000000             0.013705                0.002825                0.000624
+
+
+
+ (*) Tiempo promedio en 1000 ejecuciones del algoritmo
+
+
+
+
+cota subestimada: n^1.85
+cota ajustada: n^2.08
+cota sobreestimada: n^2.3
+
+La cota subestimada crece a medida que n va aumentando tendiendo asi a infinito. Hay dos anomalias en n = 480 y n=960.
+La cota ajustada va decreciendo a medida que n va aumentando , variando entre los valores de 0.025377 y 0.001824 , tendiendo asi a una constante de aproximadamente 0.0.002000.
+La cota sobreestimada decrece a medida que n va aumentando , por lo tanto tiende a 0, variando entre los valores 0.013986 y 0.000495, habiendo una anomalia en n = 960.
+
+ **Todos los tiempos han sido medidos en microsegundos (us)**
+ 
+ 
+4. Conclusión 
+
+Una vez estudiado el Algortimo de Prim podemos decir que su complejidad teorica es n^2, popr lo tanto es un algoritmo de complejidad cuadrática.
+Cabe destacar que la complejidad obtenida para grafos completos no dirigidos es ligeramente superior ,O(n^2.08) ,a la complejidad teorica del algoritmo O(n^2)
+
+

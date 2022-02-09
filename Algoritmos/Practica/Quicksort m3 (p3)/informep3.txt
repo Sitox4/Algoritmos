@@ -1,0 +1,338 @@
+****INFORME PRACTICA 3 ALGORITMOS****
+
+
+1.	<AUTORES>
+
+Alejandro Camino Pardo    login: a.camino@udc.es
+Sergio Vila Riveira       login: sergio.vila1@udc.es
+
+
+2<CARACTERISTICAS DE LA MÁQUINA>
+
+Procesador	 AMD RYZEN 7 5800H
+	Memoria RAM	: 16GiB
+	Kernel: 5.11.0-34-generic
+	OS: Ubuntu 21.04 hirsute
+	gcc version 10.3.0
+
+
+3<INTRODUCCIÓN>
+
+
+El objetivo de esta práctica es el estudio de la complejidad funcional de dos algoritmos de ordenación por inserción y de ordenación rápida, expuestos en el enunciado.
+
+En el siguiente informe se expondran los resultados de las pruebas empiricas realizadas sobre los algoritmos antes mencionados, que previamente fueron analizados de forma teórica en las clases de la asignatura.
+
+Para su análisis se han utilizado tres posibilidades de ordenación de un vector, ascendente ya ordenado, descendente completamente desordenado y por último uno totalmente aleatorio.
+
+Nota:  todos los tiempos han sido medidos en microsegundos (µs).
+
+Nota2:la aparición del simbolo (*) en el margen izquierdo de una linea de la tabla de mediciones indica que las medidas expuestas son menores a 500 microsegundos.
+
+
+4<ESTUDIO DE LA COMPLEJIDAD>
+
+
+Ordenación por inserción
+========================
+
+Inicialización aleatoria
+
+       n             t(n)       t(n)/n^1.8         t(n)/n^2       t(n)/n^2.2
+(*)  500        137.60600         0.001908         0.000550         0.000159
+    1000        574.00000         0.002285         0.000574         0.000144
+    2000       2249.00000         0.002571         0.000562         0.000123
+    4000       8650.00000         0.002840         0.000541         0.000103
+    8000      34491.00000         0.003252         0.000539         0.000089
+   16000     138158.00000         0.003741         0.000540         0.000078
+   32000     555961.00000         0.004323         0.000543         0.000068
+   
+complejidad cuadratica   
+   
+cota subestimada: n^1.8
+cota ajustada: n^2
+cota sobreestimada: n^2.2
+
+la cota subestimada aumenta progresivamente a medida que lo hace n, por lo tanto tiende a infinito.
+
+la cota ajustada se mueve en un intervalo de valores que no parecen seguir un orden de asceso o descenso a medida que asciende n, en el intervalo comprende entre los valores [0.000539,0.000574] y su valor media es 0.0005498 .
+
+la cota sobreestimada disminuye progresivamente a medida que aumenta n, por lo tanto tiende a 0.
+
+
+
+Inicialización ascendente
+   
+       n             t(n)       t(n)/n^0.8           t(n)/n       t(n)/n^1.2
+(*)  500          1.43100         0.009919         0.002862         0.000826
+(*) 1000          2.99800         0.011935         0.002998         0.000753
+(*) 2000          5.87000         0.013422         0.002935         0.000642
+(*) 4000         11.55900         0.015180         0.002890         0.000550
+(*) 8000         23.24000         0.017529         0.002905         0.000481
+(*)16000         47.13300         0.020419         0.002946         0.000425
+(*)32000         94.41800         0.023493         0.002951         0.000371   
+
+complejidad cuadratica
+
+cota subestimada: n^0.8
+cota ajustada: n
+cota sobreestimada: n^1.2
+
+la cota subestimada aumenta a medida que aumenta n, por lo tanto tiende a infinito.
+
+la cota ajustada tambien aumenta a medida que lo hace n pero con menos velocidad.
+
+la cota sobreestimada disminuye a medida que aumenta n, por lo tanto tiende a 0.
+
+
+
+Inicialización descendente
+
+      n             t(n)       t(n)/n^1.8         t(n)/n^2       t(n)/n^2.2
+
+(*)  500        269.28700         0.003733         0.001077         0.000311
+    1000       1107.00000         0.004407         0.001107         0.000278
+    2000       4322.00000         0.004941         0.001081         0.000236
+    4000      17649.00000         0.005794         0.001103         0.000210
+    8000      69207.00000         0.006525         0.001081         0.000179
+   16000     276882.00000         0.007497         0.001082         0.000156
+   32000    1107040.00000         0.008608         0.001081         0.000136   
+   
+complejidad cuadratica   
+   
+cota subestimada: n^1.8
+cota ajustada: n^2
+cota sobreestimada: n^2.2
+
+la cota subestimada aumenta a medida que aumenta n, por lo tanto tiende a infinito.
+
+la cota ajustada se mantiene practicamente fija en un intervalo muy pequeño [0.001077,0.001082], descartando dos valores que se pueden considerar anómalos, los pertenecientes a n=500 (0.001077) y a n=4000 (0.001103). tambien se puede destacar que el valor de n=1000 (0.001107) es, hablando de un intervalo de valores tan proximos entre si, bajo.
+
+
+
+Ordenación por ordenacion rapida con UMBRAL 1
+================================
+
+Inicialización aleatoria
+
+       n             t(n)       t(n)/n^0.9    t(n)/n*log(n)       t(n)/n^1.4
+
+(*)   500         31.38000         0.035874         0.010099         0.002807
+(*)  1000         68.32800         0.036694         0.009891         0.002161
+(*)  2000        148.20600         0.037389         0.009749         0.001657
+(*)  4000        317.88700         0.037673         0.009582         0.001257
+     8000        713.00000         0.039694         0.009917         0.000996
+    16000       1444.00000         0.037764         0.009323         0.000713
+    32000       3041.00000         0.037360         0.009161         0.000531
+    
+complejidad cuadratica    
+    
+cota subestimada: n^1.09
+cota ajustada: n*log(n)
+cota sobreestimada: n^1.5
+   
+la cota subestimada aumenta progresivamente hasta n=4000, siendo su valor minimo y maximo 0.035874 y 0.039694, respectivamente. A partir de la medida maxima aparecen dos medidas mas que parecen estar en decrecimiento, aunque concluir esto con solamente dos medidas puede ser una tanto arriesgado, por lo tanto estas dos ultimas mediciones se podrian llegar a considerar anomalas.
+
+la cota ajustada tiene un patron similar al de la cota subestimada, con un valor minimo en n=500, un valor maximo en n=8000 y a partir de ahi un descenso de las medidas registradas cuanto mas aumenta n.
+
+la cota sobreestimada disminuye poco a poco cuant omas aumenta n, por lo tanto podremos decir que tiende a 0.
+
+
+
+Inicialización ascendente
+
+       n             t(n)       t(n)/n^0.9    t(n)/n*log(n)       t(n)/n^1.4
+(*)   500         10.27100         0.038242         0.013296         0.001710
+(*)  1000         22.14000         0.044175         0.013651         0.001397
+(*)  2000         47.78300         0.051091         0.014034         0.001142
+(*)  4000        101.79900         0.058330         0.014241         0.000922
+(*)  8000        215.15300         0.066064         0.014336         0.000739
+(*) 16000        457.55000         0.075289         0.014522         0.000595
+    32000        972.00000         0.085710         0.014695         0.000479
+ 
+complejidad cuadratica
+ 
+cota subestimada: n^0.9
+cota ajustada: n*log(n)
+cota sobreestimada: n^1.4    
+    
+las cotas subestimada y ajustada aumentan a medida que aumenta n, aunque no de forma proporcional, tienden lentamente a infinito.
+la cota sobreestimada tiende a decrecer a medida que aumenta n, por lo tanto tiende a 0.
+
+    
+    
+Inicialización descendente
+
+       n             t(n)       t(n)/n^0.9    t(n)/n*log(n)       t(n)/n^1.4
+
+(*)   500         10.34600         0.038521         0.013393         0.001723
+(*)  1000         22.52900         0.044951         0.013891         0.001421
+(*)  2000         47.77700         0.051085         0.014032         0.001142
+(*)  4000        101.77300         0.058315         0.014237         0.000922
+(*)  8000        216.69900         0.066539         0.014439         0.000744
+(*) 16000        457.92400         0.075350         0.014534         0.000596
+    32000        977.00000         0.086151         0.014770         0.000482
+
+complejidad cuadratica
+    
+cota subestimada: n^0.9
+cota ajustada: n*log(n)
+cota sobreestimada: n^1.4 
+
+la cota subestimada aumenta progresivamente a medida que tambien lo hace n, por lo tanto tiende a infinito.
+
+la cota ajustada aumenta tambien progresivamente pero desde n=500 a n=32000 el intervalo de valores no varia en exceso, siendo el minimo 0.013393 y el maximo 0.014770 .
+
+la cota sobreestimada disminuye progresivamente a medida que aumenta n, por lo tanto tiende a 0.
+
+
+
+
+Ordenación por ordenacion rapida con UMBRAL 10
+
+
+Inicialización aleatoria
+       n             t(n)       t(n)/n^0.9    t(n)/n*log(n)       t(n)/n^1.4
+
+(*)   500         19.94700         0.074268         0.006419         0.003321
+(*)  1000         43.75100         0.087295         0.006334         0.002761
+(*)  2000         93.06000         0.099503         0.006122         0.002225
+(*)  4000        201.00000         0.115171         0.006059         0.001821
+(*)  8000        425.13100         0.130539         0.005913         0.001459
+    16000        931.00000         0.153194         0.006011         0.001211
+    32000       2049.00000         0.180679         0.006173         0.001010
+
+
+cota subestimada: n^0.9
+cota ajustada: n*log(n)
+cota sobreestimada: n^1.4 
+
+La cota subestimada aumenta a medida que aumenta n,por lo tanto tiende a infinito.
+La cota ajustada decrece a medida que aumenta n, variando entre 0,006419 y 0,005913 , ademas podemos observar que hay una anomalia en n = 8000.
+La cota sobreestimada decrece a medida que n aumenta , variando entre 0,003321 y 0,001010, por lo tanto tiende a 0.
+
+
+
+Inicialización ascendente
+       n             t(n)       t(n)/n^0.9    t(n)/n*log(n)       t(n)/n^1.4
+(*)   500          4.32600         0.016107         0.001392         0.000720
+(*)  1000          9.20100         0.018358         0.001332         0.000581
+(*)  2000         19.51900         0.020870         0.001284         0.000467
+(*)  4000         41.54300         0.023804         0.001252         0.000376
+(*)  8000         86.85700         0.026670         0.001208         0.000298
+(*) 16000        181.79800         0.029914         0.001174         0.000236
+(*) 32000        383.80900         0.033844         0.001156         0.000189
+
+
+cota subestimada: n^0.9
+cota ajustada: n*log(n)
+cota sobreestimada: n^1.4 
+
+La cota subestimada aumenta a medida que n aumenta tambien , por tanto tiende a infinito, variando entre los valores 0,016107 y 0,033844.
+La cota ajustada decrece a medida que n aumenta , por lo tanto tiende a 0, varia entre 0,001392 y 0,001156.
+La cota sobreestimada decrece a medida que n aumenta , por lo tanto tiende a 0 y varia entre los valores 0,000720 y 0,000189
+
+
+
+Inicialización descendente
+       n             t(n)       t(n)/n^0.9    t(n)/n*log(n)       t(n)/n^1.4
+
+(*)   500          4.62300         0.017213         0.001488         0.000770
+(*)  1000          9.92300         0.019799         0.001437         0.000626
+(*)  2000         21.09700         0.022558         0.001388         0.000504
+(*)  4000         44.63300         0.025574         0.001345         0.000404
+(*)  8000         93.19800         0.028617         0.001296         0.000320
+(*) 16000        191.64200         0.031534         0.001237         0.000249
+(*) 32000        400.41000         0.035308         0.001206         0.000197
+
+
+cota subestimada: n^0.9
+cota ajustada: n*log(n)
+cota sobreestimada: n^1.4 
+
+La cota subestimada aumenta a medida que n aumenta , por lo tanto tiende a infinito, variando entre los tiempos 0,017213 y 0,035308.
+La cota ajustada decrece muy lentamente a medida que n aumenta , por lo tanto tenderia a 0, variando entre 0,001488 y 0,001206.
+La cota sobreestimada decrece a medida que n aumenta por lo tanto tiende a 0 , variando entre 0,000770 y 0,000197.
+
+
+Ordenación por ordenacion rapida con UMBRAL 100
+Inicialización aleatoria
+       n             t(n)       t(n)/n^0.9    t(n)/n*log(n)       t(n)/n^1.4
+
+(*)   500         22.08100         0.082214         0.007106         0.003677
+(*)  1000         47.33300         0.094442         0.006852         0.002987
+(*)  2000        101.46800         0.108493         0.006675         0.002426
+(*)  4000        215.82300         0.123664         0.006505         0.001955
+(*)  8000        460.86100         0.141511         0.006410         0.001582
+    16000       1012.00000         0.166522         0.006534         0.001316
+    32000       2119.00000         0.186851         0.006383         0.001045
+
+
+cota subestimada: n^0.9
+cota ajustada: n*log(n)
+cota sobreestimada: n^1.4 
+
+La cota subestimada aumenta a medida que n tambien lo hace , por tanto tiende a infinito, variando sus tiempos entre 0,082214 y 0,186851.
+La cota ajustada decrece a medida que la n aumenta, por tanto tiende a 0, y varia entre los tiempos 0,007106 y 0,006383.Cabe destacar que cuando n es igual a 16000 hay una anomalia.
+La cota sobreestimada decrece a medid aque n aumenta, por tanto tiende a 0, variando los tiempos entre 0,003677 y 0,001045.
+
+
+Inicialización ascendente
+       n             t(n)       t(n)/n^0.9    t(n)/n*log(n)       t(n)/n^1.4
+(*)   500          2.16900         0.008076         0.001708         0.000361
+(*)  1000          4.92000         0.009817         0.001746         0.000310
+(*)  2000         11.09400         0.011862         0.001774         0.000265
+(*)  4000         24.22500         0.013881         0.001745         0.000219
+(*)  8000         52.95500         0.016260         0.001719         0.000182
+(*) 16000        113.87000         0.018737         0.001666         0.000148
+(*) 32000        245.31700         0.021632         0.001617         0.000121
+
+
+
+cota subestimada: n^0.9
+cota ajustada: n*log(n^1.15)
+cota sobreestimada: n^1.4 
+
+La cota subestimada crece a medida que aumenta n , por tanto tiende a infinito, variando los tiempos entre 0,008076 y 0,021632.
+La cota ajustada crece hasta que n es igual a 2000 y a partir de ahi comienza a decrecer, variando sus valores entre 0,001774 y 0,001617.
+La cota sobreestimada decrece a medida que n aumenta, tendiendo asi a 0, variando sus valores entre 0,000361 y 0,000121.
+
+
+Inicialización descendente
+       n             t(n)       t(n)/n^0.9    t(n)/n*log(n)       t(n)/n^1.4
+
+(*)   500          2.40700         0.008962         0.000775         0.000401
+(*)  1000          5.49400         0.010962         0.000795         0.000347
+(*)  2000         12.18600         0.013030         0.000802         0.000291
+(*)  4000         27.23100         0.015603         0.000821         0.000247
+(*)  8000         58.84500         0.018069         0.000818         0.000202
+(*) 16000        124.47300         0.020482         0.000804         0.000162
+(*) 32000        265.80400         0.023438         0.000801         0.000131
+
+
+
+cota subestimada: n^0.9
+cota ajustada: n*log(n^1.15)
+cota sobreestimada: n^1.4 
+
+La cota subestimada aumenta a medida que n tambien lo hace tendiendo asi a infinito, sus valores de los tiempos varian entre 0,008962 y 0,023438.
+La cota ajustada aumenta hasta que n llega a 4000, y a partir de ahi comienza a decrecer muy lentamente , variando los tiempos entre 0,000821 y 0,000775.
+La cota sobreestimada decrece a medida que n aumenta, tendiendo asi a 0, variando sus valores entre 0,000401 y 0,000131.
+
+
+	**Todos los tiempos han sido medidos en microsegundos (us)**
+
+5<CONCLUSIONES>
+
+Despues del analisis empirico de ambos algoritmos podemos asumir las siguientes conclusiones:
+
+El algoritmo de ordenacion por insercion es mucho mas optimo y por lo tanto rapido trabajando con inicializacion aleatoria, siendo la siguiente mas eficiente la inicializacion descendente y por ultimo la ascendente.
+
+El algoritmo de ordenacion rapida es mas optimo y por lo tanto mas rapido trabajando con inicializacion aleatoria. Su velocidad con inicializaciones ascendente y descendente es muy similar.
+
+En comparación los dos algoritmos trabajan de forma mas rápida con inicializacion aleatoria, aunque viendo metricas de complejidad a nivel general se puede observar como el algoritmo de ordenacion por inserccion es mas rapido en los tres tipos de inicializacion.
+
+Por último podemos observar que el umbral menos óptimo de los estudiados seria el umbral 1 y esto se debe a que para este umbral no se llama al método de ordenacion por insercion y por lo tanto no se aprovecha la eficiencia de este algoritmo.
+
+
+            

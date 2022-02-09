@@ -1,0 +1,132 @@
+INFORME P2
+
+AUTORES:
+   Alejandro Camino Pardo
+   Sergio Vila Riveira
+
+
+
+1.Caracteristicas del PC:
+	Procesador	 AMD RYZEN 7 5800H
+	Memoria RAM	: 16GiB
+	Kernel: 5.11.0-34-generic
+	OS: Ubuntu 21.04 hirsute
+	gcc version 10.3.0
+	
+	
+2. Introduccion
+
+El objetivo principal de esta practica consiste en el estudio de dos algoritmos de ordenacion de vectores, una mediante el metodo Shell y otra mediante el metodo de Selección. Para ello estudiamos las 3 posibilidades de ordenacion de un vector ascendete (ya ordenado), descendente ( completamente desordenado) y aleatorio. 
+
+3. Estudio complejidad
+
+----------Ordenacion Seleccion Aleatorio----------
+        n       t(n)         t(n)/n^2.20   t(n)/n^2.00   t(n)/n^1.80 
+(*)    500       128.1030        0.000148        0.000512        0.001776 
+(*)   1000       471.0330        0.000118        0.000471        0.001875 
+      2000      1837.0000        0.000100        0.000459        0.002100 
+      4000      7226.0000        0.000086        0.000452        0.002372 
+      8000     28772.0000        0.000075        0.000450        0.002713 
+     16000    114271.0000        0.000064        0.000446        0.003094 
+     32000    438858.0000        0.000054        0.000429        0.003412
+     
+La cota subestimada diverge a medida que n aumenta, tendiendo a infinito. 
+La cota ajustada varia entre 0.000512 y 0.000429.
+En cuanto a la cota sobreestimada , esta converge a medida que n aumenta, con lo que tiende a cero.
+La complejidad del algoritmo de seleccion con inicialización aleatoria es cuadrática, las cotas subestimada y sobreestimada son estudiadas mediante t(n)/(n)^1.8 y t(n)/(n)^2.2, respectivamente como se demuestra en las cabeceras de la tabla.Empíricamente obtenemos una complejidad O=n^2;
+
+----------Ordenacion Seleccion Ascendente----------
+        n       t(n)         t(n)/n^1.10   t(n)/n^1.00   t(n)/n^0.90 
+(*)    500       112.0190        0.120344        0.224038        0.417079 
+(*)   1000       432.9210        0.216974        0.432921        0.863791 
+      2000      1758.0000        0.411042        0.879000        1.879714 
+      4000      7291.0000        0.795282        1.822750        4.177660 
+      8000     29215.0000        1.486644        3.651875        8.970670 
+     16000    114054.0000        2.707563        7.128375       18.767332 
+     32000    439119.0000        4.863145       13.722469       38.721061
+     
+La cota subestimada diverge a medida que n aumenta, tendiendo a infinito. 
+La cota ajustada varía entre [0.002948 ,0.002988].
+Del mismo modo, la cota sobreestimada converge a medida que n aumenta, con lo que tiende a cero.
+La complejidad del algoritmo de seleccion con inicialización ascendente es lineal, las cotas sobreestimada y subestimada son estudiadas mediante t(n)/(n)^0.9 y t(n)/(n)^1.1 respectivamente, como se demuestra en las cabeceras de la tabla.Empíricamente obtenemos una complejidad O=n^1=n;    
+     
+     
+  ----------Ordenacion Seleccion Descendente----------   
+           n       t(n)         t(n)/n^2.20   t(n)/n^2.00   t(n)/n^1.80 
+(*)    500       148.4010        0.000171        0.000594        0.002057 
+      1000       569.0000        0.000143        0.000569        0.002265 
+      2000      2329.0000        0.000127        0.000582        0.002663 
+      4000     10292.0000        0.000122        0.000643        0.003379 
+      8000     38363.0000        0.000099        0.000599        0.003617 
+     16000    148613.0000        0.000084        0.000581        0.004024 
+     32000    574932.0000        0.000071        0.000561        0.004470 
+     
+La cota subestimada diverge a medida que n aumenta, tendiendo a infinito. 
+La cota ajustada varía entre 0.000561 y 0.000643.
+Del mismo modo, la cota sobreestimada converge a medida que n aumenta, con lo que tiende a cero.
+La complejidad del algoritmo de ordenación por seleccion con inicialización descendente es cuadrático, las cotas subestimada y sobreestimada son estudiadas mediante t(n)/(n)^1.8 y t(n)/(n)^2.2 respectivamente, como se demuestra en las cabeceras de la tabla.Empíricamente obtenemos una complejidad O=n^2;   
+     
+      
+      
+      ----------Ordenacion Shell Aleatorio----------
+               n       t(n)         t(n)/n^1.32   t(n)/n^1.20   t(n)/n^1.08 
+(*)    500        35.3270        0.009671        0.020387        0.042975 
+(*)   1000        82.1580        0.009008        0.020637        0.047277 
+(*)   2000       184.6460        0.008109        0.020188        0.050261 
+(*)   4000       413.5920        0.007275        0.019683        0.053253 
+      8000       998.0000        0.007032        0.020674        0.060785 
+     16000      2182.0000        0.006158        0.019675        0.062864 
+     32000      5351.0000        0.006048        0.021002        0.072924 
+     
+La cota subestimada diverge a medida que n aumenta, tendiendo a infinito. 
+La cota ajustada varía entre 0.019675 y 0.0021002.
+Del mismo modo, la cota sobreestimada converge a medida que n aumenta, con lo que tiende a cero.
+La complejidad del algoritmo de ordenación shell es lineal, las cotas subestimada y sobreestimada son estudiadas mediante t(n)/(n)^1.08 y t(n)/(n)^1.32 respectivamente, como se demuestra en las cabeceras de la tabla.Empíricamente obtenemos una complejidad O=n^1.2 ~= n;   
+     
+     
+     
+     ----------Ordenacion Shell Ascendente----------
+         n       t(n)         t(n)/n*log(n)^1.23   t(n)/n*log(n)^1.12   t(n)/n*log(n)^1.01 
+(*)    500        10.4510        0.002201        0.002701        0.003315 
+(*)   1000        23.6570        0.002187        0.002716        0.003372 
+(*)   2000        51.6200        0.002121        0.002662        0.003341 
+(*)   4000       114.1150        0.002106        0.002668        0.003382 
+(*)   8000       243.8550        0.002038        0.002606        0.003333 
+     16000       520.0000        0.001983        0.002557        0.003297 
+     32000      1205.0000        0.002110        0.002742        0.003563 
+     
+La cota subestimada diverge a medida que n aumenta, tendiendo a infinito. 
+La cota ajustada varía entre 0.002557 y 0.002742.
+Del mismo modo, la cota sobreestimada converge a medida que n aumenta, con lo que tiende a cero.
+La complejidad del algoritmo de ordenación shell es cuadrático, las cotas subestimada y sobreestimada son estudiadas mediante t(n)/(n)^1.01 y t(n)/(n)^1.23, respectivamente como se demuestra en las cabeceras de la tabla.Empíricamente obtenemos una complejidad O=n*log(n);     
+     
+     
+     
+     
+    ----------Ordenacion Shell Descendente----------
+             n       t(n)         t(n)/n^1.23   t(n)/n^1.12   t(n)/n^1.01 
+(*)    500        14.8520        0.007025        0.014091        0.028263 
+(*)   1000        33.5700        0.006760        0.014654        0.031765 
+(*)   2000        74.6580        0.006400        0.014994        0.035127 
+(*)   4000       164.4110        0.006001        0.015192        0.038464 
+(*)   8000       345.9180        0.005375        0.014707        0.040240 
+     16000       748.0000        0.004948        0.014631        0.043266 
+     32000      1699.0000        0.004785        0.015291        0.048865 
+     
+     
+La cota subestimada diverge a medida que n aumenta, tendiendo a infinito. 
+La cota ajustada varía entre 0.014091 y 0.00.015291.
+Del mismo modo, la cota sobreestimada converge a medida que n aumenta, con lo que tiende a cero.
+La complejidad del algoritmo de ordenación por shell es cuadrático, las cotas subestimada y sobreestimada son estudiadas mediante t(n)/(n)^1.01 y t(n)/(n)^1.23, respectivamente como se demuestra en las cabeceras de la tabla.Empíricamente obtenemos una complejidad O=n*log^2(n);
+     
+     
+     **Todos los tiempos han sido medidos en microsegundos (us)**
+     
+4. Conclusión
+
+Tras comprobar las 3 inicializaciones diferentes en ambos algoritmos encontramos la mas eficiente la descendente para el de ordenación shell , aunque su implementación y análisis  empírico es mas complicado que el de ordenación por seleccion. Se ha ejecutado 3 veces cada caso para evitar posibles anomalías.
+Todas las cotas y complejidades han sido halladas empíricamente salvo el caso propuesto para la inicializacion descendente en la ordenación por seleccion.
+En cuanto al algoritmo de ordenación por selección no presenta gran dificultad para hallar su complejidad y sus cotas, en cambio el de ordenación shell es mas complicado de implementar y de hallar su complejidad y sus cotas.
+En conclusión la ordenación por selección es más sencilla de implementar y estudiar pero menos eficiente que los tres casos de inicialización de la ordenación Shell, una buena de ver dicha afirmación en las tablas es observando el número de asteriscos que señalan cada iteración, dónde en la ordenación shell hay más. 
+     
+     

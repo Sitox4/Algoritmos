@@ -1,0 +1,157 @@
+*****INFORME P1 ALGORITMOS*****
+
+AUTORES
+
+Alejandro Camino Pardo / a.camino@udc.es
+
+Sergio Vila Riveira / sergio.vila1@udc.es
+
+Grupo 1.2
+
+*****INTRODUCCIÓN*****
+
+Se han implementado dos algoritmos que calculan la suma de la subsecuencia maxima (SumaSubMax1 y SumaSubMax2) en un conjunto de numeros n, lo que en otras palabras singnifica encontrar una secuencia que este en posiciones consecutivas en la cual su suma sea máxima dentro de un vector origen.
+
+
+*****MEDICIÓN DE TIEMPOS PARA EL ALGORITMO SumaSubMax1******
+
+TIEMPOS MEDIDOS EN MICROSEGUNDOS(us)
+
+
+---------------------------------------------------------------------------
+         n            t(n)      SUBEST      	  AJUST          SOBR 
+---------------------------------------------------------------------------         
+       500      1249.0000        0.017315        0.004996        0.001442 
+      1000      2861.0000        0.011390        0.002861        0.000719 
+      2000      4140.0000        0.004733        0.001035        0.000226 
+      4000     16404.0000        0.005386        0.001025        0.000195 
+      8000     63378.0000        0.005976        0.000990        0.000164 
+     16000    252092.0000        0.006826        0.000985        0.000142 
+     32000   1002722.0000        0.007797        0.000979        0.000123 
+
+(*)    500       248.6700        0.003447        0.000995        0.000287 
+      1000      1115.0000        0.004439        0.001115        0.000280 
+      2000      3951.0000        0.004517        0.000988        0.000216 
+      4000     15629.0000        0.005131        0.000977        0.000186 
+      8000     62458.0000        0.005889        0.000976        0.000162 
+     16000    249883.0000        0.006766        0.000976        0.000141 
+     32000   1003203.0000        0.007800        0.000980        0.000123 
+--------------------------------------------------------------------------
+
+SUBEST= t(n)/n^1.8
+AJUST=t(n)/n^2.0
+SOBR=t(n)/n^2.2
+
+En la medición 1 podemos ver que no hay ningun tiempo inferior a 500.
+Podemos ver que la SUBEST es decreciente hasta n=2000, y que a partir de ahi tiene tiempos que suben muy levemente hasta n=32000.
+La AJUST decrece a medida que n aumenta, por lo tanto tiende a 0.
+La SOBR decrece a medida que n aumenta, muy poco a poco, pero tiende a 0
+
+
+En la medición 2 podemos ver que solo el tiempo de n=500 es el único inferior a 500
+La SUBEST aumenta a la vez que lo hace n, por lo tanto tiende a infinito
+La AJUST oscila en el intervalo [0.000995,0.001115] mostrando el maximo en n=1000
+la SOBR oscila es decreciente a medida que aumenta n, por lo tanto tiene a 0.
+
+la complejidad del primer algoritmo es cuadratica.
+
+
+
+*****MEDICIÓN DE TIEMPOS PARA EL ALGORITMO SumaSubMax2*****
+
+TIEMPOS MEDIDOS EN MICROSEGUNDOS(us)
+
+
+--------------------------------------------------------------------------
+         n            t(n)       SUBEST        	   AJUST       	  SOBR
+--------------------------------------------------------------------------         
+(*)    500         1.6293        0.000023        0.000007        0.000002 
+(*)   1000         2.7761        0.000011        0.000003        0.000001 
+(*)   2000         5.0203        0.000006        0.000001        0.000000 
+(*)   4000         9.4183        0.000003        0.000001        0.000000 
+(*)   8000        17.3050        0.000002        0.000000        0.000000 
+(*)  16000        33.8307        0.000001        0.000000        0.000000 
+(*)  32000        64.4272        0.000001        0.000000        0.000000 
+
+(*)    500         1.6809        0.000023        0.000007        0.000002 
+(*)   1000         2.8011        0.000011        0.000003        0.000001 
+(*)   2000         5.0671        0.000006        0.000001        0.000000 
+(*)   4000         9.1299        0.000003        0.000001        0.000000 
+(*)   8000        17.2006        0.000002        0.000000        0.000000 
+(*)  16000        33.1010        0.000001        0.000000        0.000000 
+(*)  32000        65.0362        0.000001        0.000000        0.000000 
+
+(*)    500         1.6310        0.000023        0.000007        0.000002 
+(*)   1000         2.7870        0.000011        0.000003        0.000001 
+(*)   2000         4.8370        0.000006        0.000001        0.000000 
+(*)   4000         9.0679        0.000003        0.000001        0.000000 
+(*)   8000        18.2013        0.000002        0.000000        0.000000 
+(*)  16000        33.4779        0.000001        0.000000        0.000000 
+(*)  32000        64.7513        0.000001        0.000000        0.000000 
+-------------------------------------------------------------------------
+
+SUBEST= t(n)/n^1.8
+AJUST=t(n)/n^2.0
+SOBR=t(n)/n^2.2
+
+Lo primero que podemos observar es que cualquier medicion en cualquier n es inferior a 500.
+
+En la medición 1 podemos ver que:
+La SUBEST decrece a medida que aumenta n, tendiendo a 0, y quedando en n=32000 muy próxima a 0.
+La AJUST decrece a medida que aumenta n, siendo ya 0 su valor de n=8000 hacia abajo.
+La SOBR decrece a medida que aumenta n, siendo ya 0 su valor de n=2000 hacia abajo.
+
+En el resto de mediciones se puede apreciar que todos los valores de AJUST SUBEST y SOBR son practicamente iguales a la medicion 1.
+
+La complejidad del segundo algoritmo es lineal.
+
+
+*****OBSERVACIONES*****
+
+Para comprobar el correcto funcionamiento de los algoritmos antes de realizar las mediciones se han creado dos tests con vectores ya prefijados y pseudoaleatorios en los que se muestra por pantalla el resultado del calculo final de los dos algoritmos.
+A continuacion tenemos la salida por pantalla.
+
+test 1:
+                        sumaSubMax    sumaSubMax2
+[ -9  2 -5 -4  6  ]              6              6
+[  4  0  9  2  5  ]             20             20
+[ -2 -1 -9 -7 -1  ]              0              0
+[  9 -2  1 -7 -8  ]              9              9
+[ 15 -2 -5 -4 16  ]             20             20
+[  7 -5  6  7 -7  ]             15             15
+
+test 2:
+                                     sumaSubMax1    sumaSubMax2
+[  8  2  2  8 -2  6  4  9  2  ]             39             39
+[ -3 -3  7 -9  0 -5 -8 -6  9  ]              9              9
+[ -3  7  0  7  6  0  6 -4 -5  ]             26             26
+[  3  7  4 -3  5 -7  8  0  0  ]             17             17
+[  5 -5 -1 -6 -2  2 -8 -5 -8  ]              5              5
+[ -7 -4 -8  8  0  8 -5 -6  4  ]             16             16
+[  4  9 -9  9  2  7  0  8 -1  ]             30             30
+[  2  4  9 -8 -1 -9 -2 -1 -5  ]             15             15
+[  9 -3 -1 -8 -1  1  9 -6 -9  ]             10             10
+[  8 -2 -8 -1  9 -9 -4  5  3  ]              9              9
+
+Todas las mediciones de tiempos se han realizado en microsegundos.
+
+Se ha utilizado k = 100.000 para una mejor precisión en los tiempos.
+Los asteriscos mostrados en la tabla de tiempos como (*) indican cuando el 
+algoritmo en esa iteración no supera un tiempo de ejecución de 500 microsegundos.
+
+*****CONCLUSIONES*****
+
+La complejidad de SumaSubMax2 es inferior a la de SumaSubMax1.
+Una buena manera de observar esta diferencia es que en las cinco interaciones del algoritmo SumaSubMax2 el tiempo de ejecución es inferior a 500 microsegundos en sus 15 ejecuciones y, en cambio, en SumaSubMax1 solo tiene 1 ejecucion por debajo de los 500 microsegundos con la misma progresión, de 10 totales.
+
+*****CARACTERISTICAS DEL ORDENADOR*****
+
+	Lenovo Legion Y530-15ICH
+	Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+	SODIMM DDR4 Synchronous 2667 MHz 8Gb
+	Kernel: 5.11.0-34-generic
+	OS: Ubuntu 21.04 hirsute
+	gcc version 10.3.0
+	
+
+
