@@ -1,2 +1,2 @@
 # Algoritmos
-Algoritmos Universidad de A Coruña
+PrAlgoritmos Universidad de A Coruña 
